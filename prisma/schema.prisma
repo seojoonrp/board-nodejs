@@ -1,0 +1,22 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// 세로 한 줄을 관통시키기 위한 최소 모델입니다.
+// 필드 추가/수정하고 Comment 모델을 붙이는 건 직접 해보세요.
+model Post {
+  id        Int      @id @default(autoincrement())
+  title     String   @db.VarChar(200)
+  content   String
+  author    String   @db.VarChar(50)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("posts")
+}
+
+// TODO: Comment 모델 - Post와 1:N 관계 (postId FK, onDelete: Cascade)
